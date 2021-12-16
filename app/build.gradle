@@ -257,6 +257,7 @@ android {
             initWith debug
             isDefault false
             minifyEnabled true
+            proguardFiles = buildTypes.debug.proguardFiles
             applicationIdSuffix ".doublespeak"
             matchingFallbacks = ['debug']
             buildConfigField "String", "BUILD_VARIANT_TYPE", "\"Doublespeak\""
