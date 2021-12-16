@@ -262,7 +262,8 @@ public final class FeatureFlags {
 
   /** Creating usernames, sending messages by username. */
   public static synchronized boolean usernames() {
-    return getBoolean(USERNAMES, false);
+    return true;
+//    return getBoolean(USERNAMES, false);
   }
 
   /**
@@ -280,7 +281,8 @@ public final class FeatureFlags {
 
   /** Internal testing extensions. */
   public static boolean internalUser() {
-    return getBoolean(INTERNAL_USER, false);
+    return true;
+//    return getBoolean(INTERNAL_USER, false);
   }
 
   /** Whether or not to use the UUID in verification codes. */
@@ -303,7 +305,8 @@ public final class FeatureFlags {
    * Whether to fetch and store the secondary certificate
    */
   public static boolean phoneNumberPrivacy() {
-    return getVersionFlag(PHONE_NUMBER_PRIVACY_VERSION) == VersionFlag.ON;
+    return true;
+//    return getVersionFlag(PHONE_NUMBER_PRIVACY_VERSION) == VersionFlag.ON;
   }
 
   /** Whether to use the custom streaming muxer or built in android muxer. */
@@ -397,12 +400,14 @@ public final class FeatureFlags {
 
   /** Whether or not to show the group call ring toggle in the UI. */
   public static boolean groupCallRinging() {
-    return getBoolean(GROUP_CALL_RINGING, false);
+    return true;
+//    return getBoolean(GROUP_CALL_RINGING, false);
   }
 
   /** Whether or not to show change number in the UI. */
   public static boolean changeNumber() {
-    return getBoolean(CHANGE_NUMBER_ENABLED, false);
+    return true;
+//    return getBoolean(CHANGE_NUMBER_ENABLED, false);
   }
 
   /**
