@@ -89,6 +89,7 @@ def selectableVariants = [
         'websiteProdFlipper',
         'websiteProdRelease',
         'playProdDoublespeak',
+        'playProdCanary'
 ]
 
 android {
@@ -261,6 +262,18 @@ android {
             applicationIdSuffix ".doublespeak"
             matchingFallbacks = ['debug']
             buildConfigField "String", "BUILD_VARIANT_TYPE", "\"Doublespeak\""
+        }
+        canary {
+            if (keystores['debug'] != null) {
+                signingConfig signingConfigs.debug
+            }
+            initWith debug
+            isDefault false
+            minifyEnabled true
+            proguardFiles = buildTypes.debug.proguardFiles
+            applicationIdSuffix ".canary"
+            matchingFallbacks = ['debug']
+            buildConfigField "String", "BUILD_VARIANT_TYPE", "\"Canary\""
         }
         flipper {
             initWith debug
