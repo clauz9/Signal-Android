@@ -259,6 +259,7 @@ public final class MessageContentProcessor {
         else if (message.getReaction().isPresent())                                       messageId = handleReaction(content, message, senderRecipient);
         else if (message.getRemoteDelete().isPresent())                                   messageId = handleRemoteDelete(content, message, senderRecipient);
         else if (message.getPayment().isPresent())                                        handlePayment(content, message, senderRecipient);
+        else if (message.getStoryContext().isPresent())                                   handleStoryMessage(content);
         else if (isMediaMessage)                                                          messageId = handleMediaMessage(content, message, smsMessageId, senderRecipient, threadRecipient, receivedTime);
         else if (message.getBody().isPresent())                                           messageId = handleTextMessage(content, message, smsMessageId, groupId, senderRecipient, threadRecipient, receivedTime);
         else if (Build.VERSION.SDK_INT > 19 && message.getGroupCallUpdate().isPresent())  handleGroupCallUpdateMessage(content, message, groupId, senderRecipient);
@@ -1198,7 +1199,7 @@ public final class MessageContentProcessor {
 
   private void handleSynchronizeReadMessage(@NonNull List<ReadMessage> readMessages, long envelopeTimestamp, @NonNull Recipient senderRecipient)
   {
-    log(envelopeTimestamp, "Synchronize read message. Count: " + readMessages.size());
+    log(envelopeTimestamp, "Synchronize read message. Count: " + readMessages.size() + ", Timestamps: " + readMessages.stream().map(ReadMessage::getTimestamp));
 
     Map<Long, Long> threadToLatestRead = new HashMap<>();
 
@@ -1218,7 +1219,7 @@ public final class MessageContentProcessor {
   }
 
   private void handleSynchronizeViewedMessage(@NonNull List<ViewedMessage> viewedMessages, long envelopeTimestamp) {
-    log(envelopeTimestamp, "Synchronize viewed message. Count: " + viewedMessages.size());
+    log(envelopeTimestamp, "Synchronize view message. Count: " + viewedMessages.size() + ", Timestamps: " + viewedMessages.stream().map(ViewedMessage::getTimestamp));
 
     List<Long> toMarkViewed = Stream.of(viewedMessages)
                                     .map(message -> {
@@ -1254,6 +1255,10 @@ public final class MessageContentProcessor {
     messageNotifier.setLastDesktopActivityTimestamp(envelopeTimestamp);
     messageNotifier.cancelDelayedNotifications();
     messageNotifier.updateNotification(context);
+  }
+
+  private void handleStoryMessage(SignalServiceContent content) {
+    warn(content.getTimestamp(), "Detected a story reply. We do not support this yet. Dropping.");
   }
 
   private @Nullable MessageId handleMediaMessage(@NonNull SignalServiceContent content,
