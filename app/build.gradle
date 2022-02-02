@@ -62,8 +62,8 @@ ktlint {
     version = "0.43.2"
 }
 
-def canonicalVersionCode = 996
-def canonicalVersionName = "5.30.5"
+def canonicalVersionCode = 997
+def canonicalVersionName = "5.31.0"
 
 def postFixSize = 100
 def abiPostFix = ['universal'   : 0]
@@ -220,8 +220,6 @@ android {
         exclude 'META-INF/LICENSE'
         exclude 'META-INF/NOTICE'
         exclude 'META-INF/proguard/androidx-annotations.pro'
-        exclude '/org/spongycastle/x509/CertPathReviewerMessages.properties'
-        exclude '/org/spongycastle/x509/CertPathReviewerMessages_de.properties'
     }
 
     buildTypes {
@@ -239,7 +237,6 @@ android {
                     'proguard/proguard-appcompat-v7.pro',
                     'proguard/proguard-square-okhttp.pro',
                     'proguard/proguard-square-okio.pro',
-                    'proguard/proguard-spongycastle.pro',
                     'proguard/proguard-rounded-image-view.pro',
                     'proguard/proguard-glide.pro',
                     'proguard/proguard-shortcutbadger.pro',
@@ -546,6 +543,9 @@ dependencies {
         exclude group: 'com.google.protobuf', module: 'protobuf-java'
     }
     testImplementation testLibs.robolectric.shadows.multidex
+    testImplementation (testLibs.bouncycastle.bcprov.jdk15on) {
+        force = true
+    }
     testImplementation testLibs.hamcrest.hamcrest
 
     testImplementation(testFixtures(project(":libsignal-service")))
