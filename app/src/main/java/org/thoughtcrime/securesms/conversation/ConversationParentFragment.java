@@ -619,6 +619,10 @@ public class ConversationParentFragment extends Fragment
       if (searchViewItem != null && searchViewItem.expandActionView()) {
         searchViewModel.onSearchOpened();
       }
+    } else {
+      searchViewModel.onSearchClosed();
+      viewModel.setSearchQuery(null);
+      inputPanel.setHideForSearch(false);
     }
   }
 
@@ -1096,7 +1100,7 @@ public class ConversationParentFragment extends Fragment
   }
 
   public void invalidateOptionsMenu() {
-    if (!isSearchRequested) {
+    if (!isSearchRequested && getActivity() != null) {
       onCreateOptionsMenu(toolbar.getMenu(), requireActivity().getMenuInflater());
     }
   }
