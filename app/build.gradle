@@ -72,7 +72,9 @@ def abiPostFix = ['universal'   : 0]
 //                  'x86'         : 3,
 //                  'x86_64'      : 4]
 
-def keystores = [ 'debug'  : loadKeystoreProperties('keystore.debug.properties') ]
+def keystores = [ 'debug'       : loadKeystoreProperties('keystore.debug.properties'),
+                  'personal'    : loadKeystoreProperties('keystore.personal.properties')]
+
 
 def selectableVariants = [
         'nightlyProdFlipper',
@@ -109,6 +111,14 @@ android {
     }
 
     signingConfigs {
+        if (keystores.personal != null) {
+            personal {
+                storeFile file("${project.rootDir}/${keystores.personal.storeFile}")
+                storePassword keystores.personal.storePassword
+                keyAlias keystores.personal.keyAlias
+                keyPassword keystores.personal.keyPassword
+            }
+        }
         if (keystores.debug != null) {
             debug {
                 storeFile file("${project.rootDir}/${keystores.debug.storeFile}")
@@ -227,6 +237,9 @@ android {
             if (keystores['debug'] != null) {
                 signingConfig signingConfigs.debug
             }
+            if (keystores['personal'] != null) {
+                signingConfig signingConfigs.personal
+            }
             isDefault true
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'),
@@ -254,6 +267,9 @@ android {
         }
         doublespeak {
             initWith debug
+            if (keystores['personal'] != null) {
+                signingConfig signingConfigs.personal
+            }
             isDefault false
             minifyEnabled true
             proguardFiles = buildTypes.debug.proguardFiles
@@ -263,6 +279,9 @@ android {
         }
         canary {
             initWith debug
+            if (keystores['personal'] != null) {
+                signingConfig signingConfigs.personal
+            }
             isDefault false
             minifyEnabled true
             proguardFiles = buildTypes.debug.proguardFiles

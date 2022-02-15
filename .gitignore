@@ -3,6 +3,7 @@ captures/
 project.properties
 keystore.debug.properties
 keystore.staging.properties
+keystore.personal.properties
 .project
 .settings
 bin/
@@ -27,3 +28,4 @@ obj/
 jni/libspeex/.deps/
 pkcs11.password
 dev.keystore
+signal.personal.key.jks
