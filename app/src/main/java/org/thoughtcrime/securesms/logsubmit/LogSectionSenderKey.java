@@ -7,7 +7,6 @@ import androidx.annotation.NonNull;
 
 import org.signal.core.util.AsciiArt;
 import org.thoughtcrime.securesms.database.SignalDatabase;
-import org.thoughtcrime.securesms.keyvalue.SignalStore;
 
 /**
  * Renders data pertaining to sender key. While all private info is obfuscated, this is still only intended to be printed for internal users.
@@ -23,11 +22,9 @@ public class LogSectionSenderKey implements LogSection {
   public @NonNull CharSequence getContent(@NonNull Context context) {
     StringBuilder builder = new StringBuilder();
 
-    if (SignalStore.account().getAci() != null) {
-      builder.append("--- Sender Keys Created By This Device").append("\n\n");
-        try (Cursor cursor = SignalDatabase.senderKeys().getAllCreatedBySelf()) {
-          builder.append(AsciiArt.tableFor(cursor)).append("\n\n");
-        }
+    builder.append("--- Sender Keys Created By This Device").append("\n\n");
+    try (Cursor cursor = SignalDatabase.senderKeys().getAllCreatedBySelf()) {
+      builder.append(AsciiArt.tableFor(cursor)).append("\n\n");
     }
 
     builder.append("--- Sender Key Shared State").append("\n\n");
