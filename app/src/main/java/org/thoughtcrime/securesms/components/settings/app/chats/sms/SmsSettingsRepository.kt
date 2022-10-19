@@ -12,10 +12,6 @@ class SmsSettingsRepository(
   private val mmsDatabase: MessageDatabase = SignalDatabase.mms
 ) {
   fun getSmsExportState(): Single<SmsSettingsState.SmsExportState> {
-    if (!FeatureFlags.smsExporter()) {
-      return Single.just(SmsSettingsState.SmsExportState.NOT_AVAILABLE)
-    }
-
     return Single.fromCallable {
       checkInsecureMessageCount() ?: checkUnexportedInsecureMessageCount()
     }.subscribeOn(Schedulers.io())

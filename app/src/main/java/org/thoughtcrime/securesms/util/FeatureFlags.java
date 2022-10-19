@@ -100,7 +100,6 @@ public final class FeatureFlags {
   private static final String CAMERAX_MIXED_MODEL_BLOCKLIST     = "android.cameraXMixedModelBlockList";
   private static final String RECIPIENT_MERGE_V2                = "android.recipientMergeV2";
   private static final String CDS_V2_LOAD_TEST                  = "android.cdsV2LoadTest";
-  private static final String SMS_EXPORTER                      = "android.sms.exporter.2";
   private static final String CDS_V2_COMPAT                     = "android.cdsV2Compat.4";
   public  static final String STORIES_LOCALE                    = "android.stories.locale";
   private static final String HIDE_CONTACTS                     = "android.hide.contacts";
@@ -157,7 +156,6 @@ public final class FeatureFlags {
       CAMERAX_MIXED_MODEL_BLOCKLIST,
       RECIPIENT_MERGE_V2,
       CDS_V2_LOAD_TEST,
-      SMS_EXPORTER,
       CDS_V2_COMPAT,
       STORIES_LOCALE,
       HIDE_CONTACTS,
@@ -178,6 +176,16 @@ public final class FeatureFlags {
   @SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
   @VisibleForTesting
   static final Map<String, Object> FORCED_VALUES = new HashMap<String, Object>() {{
+
+    put(INTERNAL_USER, Boolean.TRUE);
+    put(USERNAMES, Boolean.TRUE);
+    put(GROUP_CALL_RINGING, Boolean.TRUE);
+    put(STORIES, Boolean.TRUE);
+    put(STORIES_TEXT_FUNCTIONS, Boolean.TRUE);
+    put(GIFT_BADGE_RECEIVE_SUPPORT, Boolean.TRUE);
+    put(GIFT_BADGE_SEND_SUPPORT, Boolean.TRUE);
+    put(HIDE_CONTACTS, Boolean.TRUE);
+
   }};
 
   /**
@@ -549,16 +557,6 @@ public final class FeatureFlags {
    */
   public static boolean cdsV2LoadTesting() {
     return getBoolean(CDS_V2_LOAD_TEST, false);
-  }
-
-  /**
-   * Whether or not we should enable the SMS exporter
-   *
-   * WARNING: This feature is under active development and is off for a reason. The exporter writes messages out to your
-   * system SMS / MMS database, and hasn't been adequately tested for public use. Don't enable this. You've been warned.
-   */
-  public static boolean smsExporter() {
-    return getBoolean(SMS_EXPORTER, false);
   }
 
   /**

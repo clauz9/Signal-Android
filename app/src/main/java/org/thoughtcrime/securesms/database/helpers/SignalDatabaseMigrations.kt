@@ -20,7 +20,7 @@ import org.thoughtcrime.securesms.database.helpers.migration.V159_ThreadUnreadSe
  */
 object SignalDatabaseMigrations {
 
-  const val DATABASE_VERSION = 159
+  const val DATABASE_VERSION = 160
 
   @JvmStatic
   fun migrate(context: Application, db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
