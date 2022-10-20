@@ -2006,7 +2006,7 @@
     <string name="MessageNotifier_view_once_video">View-once video</string>
     <string name="MessageNotifier_reply">Reply</string>
     <string name="MessageNotifier_signal_message">Signal Message</string>
-    <string name="MessageNotifier_unsecured_sms">Unsecured SMS</string>
+    <string name="MessageNotifier_unsecured_sms">Insecure SMS</string>
     <string name="MessageNotifier_you_may_have_new_messages">You may have new messages</string>
     <string name="MessageNotifier_open_signal_to_check_for_recent_notifications">Open Signal to check for recent notifications.</string>
     <string name="MessageNotifier_contact_message">%1$s %2$s</string>
@@ -2167,8 +2167,8 @@
 
     <!-- conversation_activity -->
     <string name="conversation_activity__type_message_push">Signal message</string>
-    <string name="conversation_activity__type_message_sms_insecure">Unsecured SMS</string>
-    <string name="conversation_activity__type_message_mms_insecure">Unsecured MMS</string>
+    <string name="conversation_activity__type_message_sms_insecure">Insecure SMS</string>
+    <string name="conversation_activity__type_message_mms_insecure">Insecure MMS</string>
     <string name="conversation_activity__from_sim_name">From %1$s</string>
     <string name="conversation_activity__sim_n">SIM %1$d</string>
     <string name="conversation_activity__send">Send</string>
