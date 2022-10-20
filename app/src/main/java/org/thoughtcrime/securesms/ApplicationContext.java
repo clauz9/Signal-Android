@@ -232,7 +232,6 @@ public class ApplicationContext extends MultiDexApplication implements AppForegr
       executePendingContactSync();
       KeyCachingService.onAppForegrounded(this);
       ApplicationDependencies.getShakeToReport().enable();
-      checkBuildExpiration();
 
       long lastForegroundTime = SignalStore.misc().getLastForegroundTime();
       long currentTime        = System.currentTimeMillis();
@@ -262,12 +261,7 @@ public class ApplicationContext extends MultiDexApplication implements AppForegr
     return persistentLogger;
   }
 
-  public void checkBuildExpiration() {
-    if (Util.getTimeUntilBuildExpiry() <= 0 && !SignalStore.misc().isClientDeprecated()) {
-      Log.w(TAG, "Build expired!");
-      SignalStore.misc().markClientDeprecated();
-    }
-  }
+
 
   private void initializeSecurityProvider() {
     try {

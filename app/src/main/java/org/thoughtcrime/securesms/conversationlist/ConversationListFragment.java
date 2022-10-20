@@ -96,7 +96,6 @@ import org.thoughtcrime.securesms.components.menu.SignalContextMenu;
 import org.thoughtcrime.securesms.components.registration.PulsingFloatingActionButton;
 import org.thoughtcrime.securesms.components.reminder.DozeReminder;
 import org.thoughtcrime.securesms.components.reminder.ExpiredBuildReminder;
-import org.thoughtcrime.securesms.components.reminder.OutdatedBuildReminder;
 import org.thoughtcrime.securesms.components.reminder.PushRegistrationReminder;
 import org.thoughtcrime.securesms.components.reminder.Reminder;
 import org.thoughtcrime.securesms.components.reminder.ReminderView;
@@ -860,8 +859,6 @@ public class ConversationListFragment extends MainFragment implements ActionMode
       } else if (ServiceOutageReminder.isEligible(context)) {
         ApplicationDependencies.getJobManager().add(new ServiceOutageDetectionJob());
         return Optional.of(new ServiceOutageReminder(context));
-      } else if (OutdatedBuildReminder.isEligible()) {
-        return Optional.of(new OutdatedBuildReminder(context));
       } else if (PushRegistrationReminder.isEligible(context)) {
         return Optional.of((new PushRegistrationReminder(context)));
       } else if (DozeReminder.isEligible(context)) {
