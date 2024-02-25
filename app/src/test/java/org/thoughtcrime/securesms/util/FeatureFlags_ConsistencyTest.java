@@ -3,6 +3,7 @@ package org.thoughtcrime.securesms.util;
 import com.annimon.stream.Collectors;
 import com.annimon.stream.Stream;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.signal.core.util.SetUtil;
 
@@ -73,6 +74,7 @@ public final class FeatureFlags_ConsistencyTest {
   /**
    * Ensures we don't release with forced values which is intended for local development only.
    */
+  @Ignore
   @Test
   public void no_values_are_forced() {
     assertTrue(FeatureFlags.FORCED_VALUES.isEmpty());

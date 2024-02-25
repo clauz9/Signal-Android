@@ -211,6 +211,17 @@ public final class FeatureFlags {
   @SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
   @VisibleForTesting
   static final Map<String, Object> FORCED_VALUES = new HashMap<String, Object>() {{
+    if (BuildConfig.BUILD_VARIANT_TYPE == "Doublespeak"){
+      put(INTERNAL_USER, Boolean.TRUE);
+    }
+
+    if (Environment.IS_STAGING) {
+      put(INTERNAL_USER, Boolean.TRUE);
+      put(PAYPAL_ONE_TIME_DONATIONS, Boolean.TRUE);
+      put(PAYPAL_RECURRING_DONATIONS, Boolean.TRUE);
+      put(PAYMENTS_REQUEST_ACTIVATE_FLOW, Boolean.TRUE);
+      put(AD_HOC_CALLING, Boolean.TRUE);
+    }
   }};
 
   /**
