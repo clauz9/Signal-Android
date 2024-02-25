@@ -33,7 +33,10 @@ val abiPostFix: Map<String, Int> = mapOf(
   "x86_64" to 4
 )
 
-val keystores: Map<String, Properties?> = mapOf("debug" to loadKeystoreProperties("keystore.debug.properties"))
+val keystores: Map<String, Properties?> = mapOf(
+  "debug" to loadKeystoreProperties("keystore.debug.properties"),
+  "personal" to loadKeystoreProperties("keystore.personal.properties")
+)
 
 val selectableVariants = listOf(
   "nightlyProdSpinner",
@@ -108,6 +111,16 @@ android {
       keyAlias = properties.getProperty("keyAlias")
       keyPassword = properties.getProperty("keyPassword")
     }
+  }
+
+  keystores["personal"]?.let { properties ->
+    signingConfigs.create("personal").apply {
+      storeFile = file("${project.rootDir}/${properties.getProperty("storeFile")}")
+      storePassword = properties.getProperty("storePassword")
+      keyAlias = properties.getProperty("keyAlias")
+      keyPassword = properties.getProperty("keyPassword")
+    }
+
   }
 
   testOptions {
