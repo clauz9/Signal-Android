@@ -43,6 +43,7 @@ val selectableVariants = listOf(
   "nightlyPnpPerf",
   "nightlyPnpRelease",
   "playProdDebug",
+  "playProdDoublespeak",
   "playProdSpinner",
   "playProdCanary",
   "playProdPerf",
@@ -281,6 +282,15 @@ android {
       isMinifyEnabled = true
       proguardFiles(*buildTypes["debug"].proguardFiles.toTypedArray())
       buildConfigField("String", "BUILD_VARIANT_TYPE", "\"Release\"")
+    }
+
+    create("doublespeak") {
+      initWith(getByName("debug"))
+      isDefault = false
+      isMinifyEnabled = false
+      matchingFallbacks += "debug"
+      buildConfigField("String", "BUILD_VARIANT_TYPE", "\"Doublespeak\"")
+      applicationIdSuffix = ".doublespeak"
     }
 
     create("instrumentation") {
