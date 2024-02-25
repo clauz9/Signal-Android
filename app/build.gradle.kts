@@ -299,6 +299,9 @@ android {
 
     create("doublespeak") {
       initWith(getByName("debug"))
+      if (keystores["personal"] != null) {
+        signingConfig = signingConfigs["personal"]
+      }
       isDefault = false
       isMinifyEnabled = false
       matchingFallbacks += "debug"
