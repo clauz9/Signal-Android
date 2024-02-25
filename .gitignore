@@ -2,7 +2,9 @@
 captures/
 project.properties
 keystore.debug.properties
+keystore.personal.properties
 keystore.staging.properties
+signal.personal.key.jks
 nightly-url.txt
 .project
 .settings
